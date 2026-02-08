@@ -1,9 +1,9 @@
 const vocabulary = [
     // REACTIONS & IMPRESSIONS
-    { j: "Mondainai", e: "No problem", c: "reactions" },
+    { j: "Mondai nai", e: "No problem", c: "reactions" },
     { j: "Subarashii", e: "Wonderful", c: "reactions" },
     { j: "Saiko", e: "Great / The Best", c: "reactions" },
-    { j: "Yasashi", e: "Kind / Easy", c: "reactions" },
+    { j: "Yasashii", e: "Kind / Gentle", c: "reactions" },
     { j: "Sugoi", e: "Amazing / Wow", c: "reactions" },
     { j: "Saiko desu", e: "It's the best", c: "reactions" },
     { j: "Yokatta", e: "That's good / I'm glad", c: "reactions" },
@@ -12,11 +12,11 @@ const vocabulary = [
 
     // UNDERSTANDING & MEMORY
     { j: "Naruhodo", e: "I see / Understood", c: "understanding" },
-    { j: "Wakarimashita", e: "Understood (Past form)", c: "understanding" },
+    { j: "Wakarimashita", e: "I understand / Understood", c: "understanding" },
     { j: "Wakarimasu", e: "Understand (Present form)", c: "understanding" },
     { j: "Sou desu ka", e: "I see / Is that so?", c: "understanding" },
-    { j: "Oboite", e: "Remember! / Memorize (Request or command)", c: "understanding" },
-    { j: "Oboiteinae", e: "Don't remember / Haven't memorized", c: "understanding" },
+    { j: "Oboete", e: "Remember / Memorize (Request)", c: "understanding" },
+    { j: "Oboeteinai", e: "I don't remember", c: "understanding" },
     { j: "Wakarimasen", e: "I don't understand", c: "understanding" },
     { j: "Oboeteinai", e: "I don't remember", c: "understanding" },
     { j: "Wakatta", e: "I got it (casual)", c: "understanding" },
@@ -31,7 +31,7 @@ const vocabulary = [
     { j: "Tamani", e: "Occasionally", c: "frequency" },
     { j: "Amari", e: "Not much (used with negative verb)", c: "frequency" },
     { j: "Amari ne", e: "Not really / Not much", c: "frequency" },
-    { j: "Zenzen", e: "Not at all", c: "frequency" },
+    { j: "Zenzen", e: "Not at all (with negative)", c: "frequency" },
     { j: "Chotto dake", e: "Just a little", c: "frequency" },
     { j: "Chotto", e: "A little / Wait", c: "frequency" },
 
@@ -99,7 +99,7 @@ const vocabulary = [
     { j: "Genki desu", e: "I'm fine / Healthy", c: "feelings" },
     { j: "Genki", e: "Fine / Energetic", c: "feelings" },
     { j: "Genki sou desu", e: "You look fine", c: "feelings" },
-    { j: "Himadesu", e: "I'm free", c: "feelings" },
+    { j: "Hima desu", e: "I'm free", c: "feelings" },
     { j: "Tanoshii", e: "Fun", c: "feelings" },
     { j: "Sabishii", e: "Lonely", c: "feelings" },
     { j: "Kowai", e: "Scary", c: "feelings" },
@@ -139,7 +139,7 @@ const vocabulary = [
     // WORRY & CONCERN
     { j: "Kinishinaide", e: "Don't worry (about it)", c: "concern" },
     { j: "Shinpaishinaide", e: "Don't be anxious / Don't worry", c: "concern" },
-    { j: "Kamai masen", e: "I don't mind / No problem", c: "concern" },
+    { j: "Kamaimasen", e: "I don't mind / No problem", c: "concern" },
     { j: "Ki o tsukete", e: "Take care", c: "concern" },
     { j: "Otsukaresama desu", e: "Thank you for your hard work", c: "concern" },
     { j: "Otsukaresama deshita", e: "Thanks for your hard work (past)", c: "concern" },
@@ -190,7 +190,7 @@ const vocabulary = [
 
     // SPECIAL OCCASIONS
     { j: "Otanjoubi omedetou", e: "Happy birthday", c: "occasions" },
-    { j: "Omedettou gozaimasu", e: "Happy birthday (polite)", c: "occasions" },
+    { j: "Omedetou gozaimasu", e: "Happy birthday (polite)", c: "occasions" },
     { j: "Tsugi wa", e: "Next is... / As for the next one", c: "occasions" },
     { j: "Yamete", e: "Stop", c: "occasions" },
 
@@ -248,7 +248,7 @@ const vocabulary = [
     { j: "Suiyoubi", e: "Wednesday", c: "days" },
     { j: "Mokuyoubi", e: "Thursday", c: "days" },
     { j: "Kinyoubi", e: "Friday", c: "days" },
-    { j: "Douyoubi", e: "Saturday", c: "days" },
+    { j: "Doyoubi", e: "Saturday", c: "days" },
 
     // MONTHS
     { j: "Ichigatsu", e: "January", c: "months" },
@@ -541,23 +541,47 @@ const scenarios = [
     {
         title: "Okaasan (Mother)",
         question: "Kono hito wa watashi no okaasan desu ka?",
+        questionEN: "Is this person my mother?",
         pos: "Hai, sono hito wa anata no okaasan desu.",
+        posEN: "Yes, that person is your mother.",
         neg: "Iie, sono hito wa anata no okaasan de wa arimasen.",
-        correction: "Sono hito wa watashi no tomodachi desu."
+        negEN: "No, that person is not your mother."
     },
     {
         title: "Tomodachi (Friend)",
         question: "Sono hito wa watashi no tomodachi desu ka?",
+        questionEN: "Is that person my friend?",
         pos: "Hai, kono hito wa anata no tomodachi desu.",
+        posEN: "Yes, this person is your friend.",
         neg: "Iie, kono hito wa anata no tomodachi de wa arimasen.",
-        correction: "Kono hito wa watashi no senpai desu."
+        negEN: "No, this person is not your friend."
     },
     {
         title: "Senpai (Senior)",
         question: "Ano hito wa watashi no senpai desu ka?",
+        questionEN: "Is that person my senior?",
         pos: "Hai, ano hito wa anata no senpai desu.",
+        posEN: "Yes, that person is your senior.",
         neg: "Iie, ano hito wa anata no senpai de wa arimasen.",
-        correction: "Ano hito wa watashi no sensei desu."
+        negEN: "No, that person is not your senior."
+    },
+    {
+        title: "Kore/Sore (Things)",
+        question: "Kore wa nan desu ka?",
+        questionEN: "What is this?",
+        pos: "Sore wa pen desu.",
+        posEN: "That is a pen.",
+        neg: "Sore wa pen de wa arimasen.",
+        negEN: "That is not a pen."
+    },
+    {
+        title: "Koko/Soko (Place)",
+        question: "Koko wa toire desu ka?",
+        questionEN: "Is this place a toilet/restroom?",
+        pos: "Hai, soko wa toire desu.",
+        posEN: "Yes, that place is a toilet/restroom.",
+        neg: "Iie, soko wa toire de wa arimasen.",
+        negEN: "No, that place is not a toilet/restroom."
     }
 ];
 
@@ -568,30 +592,22 @@ let quizIndex = 0;
 
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-}
+    const overlay = document.getElementById('mobile-menu-overlay');
 
-function mobileMenuUpdateMode() {
-    const mobileJtoE = document.getElementById('mobile-modeJtoE');
-    const mobileEtoJ = document.getElementById('mobile-modeEtoJ');
-    if (flashMode === 'JtoE') {
-        mobileJtoE.style.backgroundColor = 'var(--indigo)';
-        mobileJtoE.style.borderColor = 'var(--indigo)';
-        mobileJtoE.style.color = 'white';
-        mobileJtoE.style.opacity = '1';
-        mobileEtoJ.style.opacity = '0.7';
-        mobileEtoJ.style.backgroundColor = 'transparent';
-        mobileEtoJ.style.color = 'var(--text-primary)';
+    const isOpen = menu.classList.contains('menu-open');
+
+    if (isOpen) {
+        // Close menu
+        menu.classList.remove('menu-open');
+        overlay.classList.remove('overlay-visible');
     } else {
-        mobileEtoJ.style.backgroundColor = 'var(--indigo)';
-        mobileEtoJ.style.borderColor = 'var(--indigo)';
-        mobileEtoJ.style.color = 'white';
-        mobileEtoJ.style.opacity = '1';
-        mobileJtoE.style.opacity = '0.7';
-        mobileJtoE.style.backgroundColor = 'transparent';
-        mobileJtoE.style.color = 'var(--text-primary)';
+        // Open menu
+        overlay.classList.add('overlay-visible');
+        menu.classList.add('menu-open');
     }
 }
+
+
 
 function switchTab(t) {
     document.getElementById('flashcards-section').classList.toggle('hidden', t !== 'flashcards');
@@ -609,61 +625,32 @@ function switchTab(t) {
         desktopDialogueTab.className = t === 'dialogue' ? 'tab-active pb-2 transition-all duration-200 border-b-2' : 'pb-2 opacity-60 hover:opacity-100 transition-all duration-200 border-b-2 border-transparent';
     }
 
+    // Update mobile tabs styling
+    const mobileFlashcardsTab = document.getElementById('mobile-tab-flashcards');
+    const mobileQuizTab = document.getElementById('mobile-tab-quiz');
+    const mobileDialogueTab = document.getElementById('mobile-tab-dialogue');
+
+    if (mobileFlashcardsTab && mobileQuizTab && mobileDialogueTab) {
+        mobileFlashcardsTab.classList.toggle('active', t === 'flashcards');
+        mobileQuizTab.classList.toggle('active', t === 'quiz');
+        mobileDialogueTab.classList.toggle('active', t === 'dialogue');
+    }
+
     if (t === 'dialogue') renderDialogue();
     if (t === 'quiz') resetQuiz();
 }
 
-function setMode(m) {
-    flashMode = m;
-    
-    // Update desktop mode buttons
-    const modeJtoE = document.getElementById('modeJtoE');
-    const modeEtoJ = document.getElementById('modeEtoJ');
-    
-    if (modeJtoE && modeEtoJ) {
-        if (m === 'JtoE') {
-            modeJtoE.style.backgroundColor = 'var(--indigo)';
-            modeJtoE.style.borderColor = 'var(--indigo)';
-            modeJtoE.style.color = 'white';
-            modeJtoE.style.opacity = '1';
-            modeEtoJ.style.opacity = '0.7';
-            modeEtoJ.style.backgroundColor = 'transparent';
-            modeEtoJ.style.color = 'var(--text-primary)';
-        } else {
-            modeEtoJ.style.backgroundColor = 'var(--indigo)';
-            modeEtoJ.style.borderColor = 'var(--indigo)';
-            modeEtoJ.style.color = 'white';
-            modeEtoJ.style.opacity = '1';
-            modeJtoE.style.opacity = '0.7';
-            modeJtoE.style.backgroundColor = 'transparent';
-            modeJtoE.style.color = 'var(--text-primary)';
-        }
-    }
-    
-    // Update mobile mode buttons
-    const mobileModeJtoE = document.getElementById('mobile-modeJtoE');
-    const mobileModeEtoJ = document.getElementById('mobile-modeEtoJ');
-    
-    if (mobileModeJtoE && mobileModeEtoJ) {
-        if (m === 'JtoE') {
-            mobileModeJtoE.style.backgroundColor = 'var(--indigo)';
-            mobileModeJtoE.style.borderColor = 'var(--indigo)';
-            mobileModeJtoE.style.color = 'white';
-            mobileModeJtoE.style.opacity = '1';
-            mobileModeEtoJ.style.opacity = '0.7';
-            mobileModeEtoJ.style.backgroundColor = 'transparent';
-            mobileModeEtoJ.style.color = 'var(--text-primary)';
-        } else {
-            mobileModeEtoJ.style.backgroundColor = 'var(--indigo)';
-            mobileModeEtoJ.style.borderColor = 'var(--indigo)';
-            mobileModeEtoJ.style.color = 'white';
-            mobileModeEtoJ.style.opacity = '1';
-            mobileModeJtoE.style.opacity = '0.7';
-            mobileModeJtoE.style.backgroundColor = 'transparent';
-            mobileModeJtoE.style.color = 'var(--text-primary)';
-        }
-    }
-    
+function toggleMode() {
+    flashMode = flashMode === 'JtoE' ? 'EtoJ' : 'JtoE';
+
+    // Update labels
+    const label = flashMode === 'JtoE' ? 'JP ⇄ EN' : 'EN ⇄ JP';
+    const desktopLabel = document.getElementById('modeLabel');
+    const mobileLabel = document.getElementById('mobile-modeLabel');
+
+    if (desktopLabel) desktopLabel.textContent = label;
+    if (mobileLabel) mobileLabel.textContent = label;
+
     filterCards();
 }
 
@@ -695,10 +682,10 @@ function filterCards() {
         card.innerHTML = `
             <div class="flip-card-inner" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-front text-center">
-                    <p class="text-sm font-semibold tracking-tight text-slate-700">${f}</p>
+                    <p class="text-sm font-semibold tracking-tight" style="color: var(--text-primary);">${f}</p>
                 </div>
                 <div class="flip-card-back text-center">
-                    <p class="text-sm font-bold text-indigo-600 uppercase">${b}</p>
+                    <p class="text-sm font-bold uppercase" style="color: var(--accent-primary);">${b}</p>
                 </div>
             </div>
         `;
@@ -775,13 +762,48 @@ function resetQuiz() {
 
     cats.forEach(cat => {
         const label = document.createElement('label');
-        label.className = "flex items-center gap-3 p-3 bg-slate-50/60 rounded-lg cursor-pointer hover:bg-indigo-50/50 transition-colors";
-        label.innerHTML = `
-            <input type="checkbox" value="${cat}" checked class="w-4 h-4 accent-indigo-600 cursor-pointer">
-            <span class="text-xs font-semibold uppercase tracking-widest text-slate-600">${cat.replace('_', ' ')}</span>
-        `;
+        label.className = 'flex items-center p-3 rounded-xl cursor-pointer transition-all duration-200 hover:scale-[1.02] border hover:shadow-sm';
+        label.style.cssText = "background-color: var(--bg-tertiary); border-color: var(--border-color);";
+
+        // Format label text: "numbers-1-10" -> "Numbers 1-10"
+        let displayText = cat.replace(/_/g, ' ');
+        if (displayText.startsWith('numbers-')) {
+            // Keep the hyphen for ranges like 1-10, but replace for words
+            const suffix = displayText.replace('numbers-', '');
+            // Check if suffix starts with a digit (e.g. 1-10), if so keep hyphen, else space
+            if (/^\d/.test(suffix)) {
+                displayText = `Numbers ${suffix}`;
+            } else {
+                displayText = `Numbers ${suffix.replace('-', ' ')}`;
+            }
+        }
+
+        // Use theme variables and consistent typography
+        // For numbers categories, add responsive line break
+        let labelHTML;
+        if (displayText.startsWith('Numbers ')) {
+            const range = displayText.replace('Numbers ', '');
+            labelHTML = `
+                <input type="checkbox" value="${cat}" checked class="quiz-checkbox">
+                <span class="text-xs font-bold uppercase tracking-wide" style="color: var(--text-secondary);">Numbers<br class="sm:hidden"> ${range}</span>
+            `;
+        } else {
+            labelHTML = `
+                <input type="checkbox" value="${cat}" checked class="quiz-checkbox">
+                <span class="text-xs font-bold uppercase tracking-wide" style="color: var(--text-secondary);">${displayText}</span>
+            `;
+        }
+        label.innerHTML = labelHTML;
         container.appendChild(label);
     });
+}
+
+function selectAllCategories() {
+    document.querySelectorAll('#quiz-categories input[type="checkbox"]').forEach(cb => cb.checked = true);
+}
+
+function deselectAllCategories() {
+    document.querySelectorAll('#quiz-categories input[type="checkbox"]').forEach(cb => cb.checked = false);
 }
 
 function startQuiz() {
@@ -839,25 +861,119 @@ function endQuiz() {
     switchTab('quiz');
 }
 
+let perspectiveMode = 'kono'; // 'kono' (Speaker->Listener) or 'sono' (Listener->Speaker)
+
+function togglePerspective() {
+    perspectiveMode = perspectiveMode === 'kono' ? 'sono' : 'kono';
+
+    // Update UI
+    const labelKono = document.getElementById('label-kono');
+    const labelSono = document.getElementById('label-sono');
+    const icon = document.getElementById('perspective-icon');
+
+    if (perspectiveMode === 'kono') {
+        // Speaker View (Pink Gradient)
+        labelKono.textContent = 'Kono';
+        labelSono.textContent = 'Sono';
+        icon.style.transform = 'rotate(0deg)';
+        document.getElementById('perspective-bg').style.background = 'var(--gradient-speaker)';
+    } else {
+        // Listener View (Blue Gradient)
+        labelKono.textContent = 'Sono';
+        labelSono.textContent = 'Kono';
+        icon.style.transform = 'rotate(180deg)';
+        document.getElementById('perspective-bg').style.background = 'var(--gradient-listener)';
+    }
+
+    renderDialogue();
+}
+
+// Helper for bidirectional swapping
+function swapPerspectiveText(text) {
+    if (!text) return text;
+
+    // Map of swappable terms
+    const map = {
+        'Kono': 'Sono', 'Sono': 'Kono',
+        'kono': 'sono', 'sono': 'kono',
+        'Kore': 'Sore', 'Sore': 'Kore',
+        'kore': 'sore', 'sore': 'kore',
+        'Koko': 'Soko', 'Soko': 'Koko',
+        'koko': 'soko', 'soko': 'koko'
+    };
+
+    // We look for whole words matching our keys
+    return text.replace(/\b(Kono|Sono|kono|sono|Kore|Sore|kore|sore|Koko|Soko|koko|soko)\b/g, (match) => {
+        return map[match] || match;
+    });
+}
+
+function swapEnglishPerspective(text, jpText) {
+    if (!text) return text;
+
+    // If Japanese text contains "Ano", "Are", or "Asoko", 
+    // it refers to something far from *both* speaker and listener.
+    // In this case, "That" (English) should logically remain "That" and NOT swap to "This".
+    if (jpText && (jpText.includes('Ano') || jpText.includes('Are') || jpText.includes('Asoko') ||
+        jpText.includes('ano') || jpText.includes('are') || jpText.includes('asoko'))) {
+        return text;
+    }
+
+    // Simple swap for English context: This <-> That
+    // Case insensitive but preserve case for replacement
+    const map = {
+        'This': 'That', 'That': 'This',
+        'this': 'that', 'that': 'this'
+    };
+    return text.replace(/\b(This|That|this|that)\b/g, (match) => {
+        return map[match] || match;
+    });
+}
+
 function renderDialogue() {
     const list = document.getElementById('dialogue-list');
     list.innerHTML = '';
     scenarios.forEach((s, i) => {
+        let question, questionEN, pos, posEN, neg, negEN;
+        if (perspectiveMode === 'kono') {
+            // Speaker View (Default)
+            question = s.question;
+            questionEN = s.questionEN;
+            pos = s.pos;
+            posEN = s.posEN;
+            neg = s.neg;
+            negEN = s.negEN;
+        } else {
+            // Listener View: Swap perspectives (only Japanese swaps text, English stays same meaning but context might change - for now keep EN static or should we swap 'this/that'?)
+            // Actually, if we swap 'Kono' to 'Sono', the English 'This' should become 'That'.
+            // Let's swap the English pronouns too for consistency.
+            question = swapPerspectiveText(s.question);
+            questionEN = swapEnglishPerspective(s.questionEN, s.question);
+            pos = swapPerspectiveText(s.pos);
+            posEN = swapEnglishPerspective(s.posEN, s.pos);
+            neg = swapPerspectiveText(s.neg);
+            negEN = swapEnglishPerspective(s.negEN, s.neg);
+        }
+
         const div = document.createElement('div');
-        div.className = "bg-white border border-slate-200/50 rounded-xl p-6 shadow-sm";
+        div.className = "rounded-xl p-6 shadow-sm transition-colors duration-300";
+        div.style.cssText = "background-color: var(--bg-secondary); border: 1.5px solid var(--border-color);";
         div.innerHTML = `
-            <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">${s.title}</h3>
-            <p class="text-lg font-semibold text-slate-900 mb-6">Q: ${s.question}</p>
+            <h3 class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--text-muted);">${s.title}</h3>
+            <p class="text-lg font-semibold mb-1" style="color: var(--text-primary);">Q: ${question}</p>
+            <p class="text-sm italic opacity-70 mb-6" style="color: var(--text-secondary);">${questionEN}</p>
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <button onclick="toggleD('p${i}')" class="bg-emerald-50/60 text-emerald-700 text-xs font-semibold uppercase py-3 rounded-lg border border-emerald-200/60 hover:bg-emerald-100/40 transition-colors">Positive</button>
-                <button onclick="toggleD('n${i}')" class="bg-rose-50/60 text-rose-700 text-xs font-semibold uppercase py-3 rounded-lg border border-rose-200/60 hover:bg-rose-100/40 transition-colors">Negative</button>
+                <button onclick="toggleD('p${i}')" class="text-xs font-semibold uppercase py-3 rounded-lg transition-all duration-200 hover:scale-[1.02]" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2);">Positive</button>
+                <button onclick="toggleD('n${i}')" class="text-xs font-semibold uppercase py-3 rounded-lg transition-all duration-200 hover:scale-[1.02]" style="background: rgba(244, 63, 94, 0.1); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.2);">Negative</button>
             </div>
-            <div id="p${i}" class="reveal-section bg-slate-50/60 p-4 rounded-lg border-l-4 border-emerald-500 mb-2">
-                <p class="text-sm font-medium text-slate-900">${s.pos}</p>
+            <div id="p${i}" class="reveal-section p-4 rounded-lg border-l-4 mb-2" style="background: var(--bg-tertiary); border-left-color: #10b981;">
+                <p class="text-sm font-medium" style="color: var(--text-primary);">${pos}</p>
+                <p class="text-xs italic opacity-70 mt-1" style="color: var(--text-secondary);">${posEN}</p>
             </div>
-            <div id="n${i}" class="reveal-section bg-slate-50/60 p-4 rounded-lg border-l-4 border-rose-500">
-                <p class="text-sm font-medium text-slate-900">${s.neg}</p>
-                <p class="text-xs text-slate-500 mt-3 italic">Correction: ${s.correction}</p>
+            <div id="n${i}" class="reveal-section p-4 rounded-lg border-l-4" style="background: var(--bg-tertiary); border-left-color: #f43f5e;">
+                <p class="text-sm font-medium" style="color: var(--text-primary);">${neg}</p>
+                <p class="text-xs italic opacity-70 mt-1" style="color: var(--text-secondary);">${negEN}</p>
+
             </div>
         `;
         list.appendChild(div);
@@ -866,15 +982,81 @@ function renderDialogue() {
 
 function toggleD(id) {
     const target = document.getElementById(id);
-    const parent = target.parentElement;
-    parent.querySelectorAll('.reveal-section').forEach(s => { if (s.id !== id) s.classList.remove('active'); });
+    const parent = target.parentElement; // div.grid.grid-cols-2... NO wait.
+    // DOM structure correction:
+    // div.rounded-xl 
+    //   h3
+    //   p
+    //   div.grid (buttons)
+    //   div#pi
+    //   div#ni
+
+    // In original code: const parent = target.parentElement; meant the Grid?
+    // No, toggleD is called by button in grid.
+    // Wait, the toggleD logic: `const parent = target.parentElement;`
+    // `target` is the `div#p${i}` or `div#n${i}` which are SIBLINGS of the grid.
+    // Ah, `toggleD` argument is the ID of the reveal section.
+    // So `target` is the reveal section.
+    // Its parent is the `div.rounded-xl`.
+    // Correct.
+
+    // BUT in the button onclick: `toggleD('p${i}')`
+    // The previous implementation:
+    // `const parent = target.parentElement;` -> Correct (the card container).
+    // `parent.querySelectorAll('.reveal-section')` -> finds both p and n.
+    // `if (s.id !== id) s.classList.remove('active');` -> closes the other one.
+    // `target.classList.toggle('active');` -> toggles current.
+
+    // This logic is correct. I will preserve it exactly.
+
+    const container = target.parentElement;
+    container.querySelectorAll('.reveal-section').forEach(s => {
+        if (s.id !== id) s.classList.remove('active');
+    });
     target.classList.toggle('active');
 }
 
-function toggleTheme() {
+function toggleTheme(event) {
+    if (!document.startViewTransition) {
+        updateTheme();
+        return;
+    }
+
+    document.startViewTransition(() => updateTheme()); return;
+    /*
+    const x = event ? event.clientX : window.innerWidth / 2;
+    const y = event ? event.clientY : window.innerHeight / 2;
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => updateTheme());
+
+    transition.ready.then(() => {
+        const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`
+        ];
+
+        document.documentElement.animate(
+            {
+                clipPath: clipPath
+            },
+            {
+                duration: 500,
+                easing: 'ease-in-out',
+                pseudoElement: '::view-transition-new(root)'
+            }
+        );
+    });
+    */
+}
+
+function updateTheme() {
     const html = document.documentElement;
     const isDark = html.classList.contains('dark-mode');
-    
+
     if (isDark) {
         html.classList.remove('dark-mode');
         localStorage.setItem('theme', 'light');
@@ -889,7 +1071,7 @@ function toggleTheme() {
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     const html = document.documentElement;
-    
+
     if (savedTheme === 'dark') {
         html.classList.add('dark-mode');
         document.getElementById('theme-icon').innerText = '☀️';
@@ -899,7 +1081,7 @@ function initTheme() {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     initTheme();
     initCategoryDropdown();
     const termInput = document.getElementById('termSearch');
