@@ -541,6 +541,8 @@ const scenarios = [
         title: "Okaasan (Mother)",
         question: "Kono hito wa watashi no okaasan desu ka?",
         questionEN: "Is this person my mother?",
+        qAudio: "assets/audio/Kono hito wa watashi no okaasan desu ka.m4a",
+        qAudioSono: "assets/audio/Sono hito wa watashi no okaasan desu ka.m4a",
         pos: "Hai, sono hito wa anata no okaasan desu.",
         posEN: "Yes, that person is your mother.",
         neg: "Iie, sono hito wa anata no okaasan de wa arimasen.",
@@ -550,6 +552,8 @@ const scenarios = [
         title: "Tomodachi (Friend)",
         question: "Kono hito wa watashi no tomodachi desu ka?",
         questionEN: "Is this person my friend?",
+        qAudio: "assets/audio/Kono hito wa watashi no tomodachi desu ka.m4a",
+        qAudioSono: "assets/audio/Sono hito wa watashi no tomodachi desu ka.m4a",
         pos: "Hai, sono hito wa anata no tomodachi desu.",
         posEN: "Yes, that person is your friend.",
         neg: "Iie, sono hito wa anata no tomodachi de wa arimasen.",
@@ -559,6 +563,8 @@ const scenarios = [
         title: "Senpai (Senior)",
         question: "Kono hito wa watashi no senpai desu ka?",
         questionEN: "Is this person my senior?",
+        qAudio: "assets/audio/Kono hito wa watashi no senpai desu ka.m4a",
+        qAudioSono: "assets/audio/Sono hito wa watashi no senpai desu ka.m4a",
         pos: "Hai, sono hito wa anata no senpai desu.",
         posEN: "Yes, that person is your senior.",
         neg: "Iie, sono hito wa anata no senpai de wa arimasen.",
@@ -568,6 +574,8 @@ const scenarios = [
         title: "Kore/Sore (Things)",
         question: "Kore wa nan desu ka?",
         questionEN: "What is this?",
+        qAudio: "assets/audio/Kore wa nan desu ka.m4a",
+        qAudioSono: "assets/audio/Sore wa nan desu ka.m4a",
         pos: "Sore wa pen desu.",
         posEN: "That is a pen.",
         neg: "Sore wa pen de wa arimasen.",
@@ -577,6 +585,8 @@ const scenarios = [
         title: "Koko/Soko (Place)",
         question: "Koko wa toire desu ka?",
         questionEN: "Is this place a toilet/restroom?",
+        qAudio: "assets/audio/Koko wa toire desu ka.m4a",
+        qAudioSono: "assets/audio/Soko wa toire desu ka.m4a",
         pos: "Hai, soko wa toire desu.",
         posEN: "Yes, that place is a toilet/restroom.",
         neg: "Iie, soko wa toire de wa arimasen.",
@@ -1064,6 +1074,7 @@ function togglePerspective() {
         document.getElementById('perspective-bg').style.background = 'var(--gradient-listener)';
     }
 
+
     renderDialogue();
 }
 
@@ -1114,8 +1125,8 @@ function renderDialogue() {
     list.innerHTML = '';
     scenarios.forEach((s, i) => {
         let question, questionEN, pos, posEN, neg, negEN;
+        // Logic for Text Swapping
         if (perspectiveMode === 'kono') {
-            // Speaker View (Default)
             question = s.question;
             questionEN = s.questionEN;
             pos = s.pos;
@@ -1123,9 +1134,6 @@ function renderDialogue() {
             neg = s.neg;
             negEN = s.negEN;
         } else {
-            // Listener View: Swap perspectives (only Japanese swaps text, English stays same meaning but context might change - for now keep EN static or should we swap 'this/that'?)
-            // Actually, if we swap 'Kono' to 'Sono', the English 'This' should become 'That'.
-            // Let's swap the English pronouns too for consistency.
             question = swapPerspectiveText(s.question);
             questionEN = swapEnglishPerspective(s.questionEN, s.question);
             pos = swapPerspectiveText(s.pos);
@@ -1137,21 +1145,41 @@ function renderDialogue() {
         const div = document.createElement('div');
         div.className = "rounded-xl p-6 shadow-sm transition-colors duration-300";
         div.style.cssText = "background-color: var(--bg-secondary); border: 1.5px solid var(--border-color);";
+
+        // Audio Logic: Select file based on perspective
+        let useAudio = '';
+        if (perspectiveMode === 'kono') {
+            // Speaker View -> Use 'Kono' audio (default qAudio)
+            if (s.qAudio) useAudio = s.qAudio;
+        } else {
+            // Listener View -> Use 'Sono' audio (qAudioSono)
+            if (s.qAudioSono) useAudio = s.qAudioSono;
+        }
+
         div.innerHTML = `
             <h3 class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--text-muted);">${s.title}</h3>
-            <p class="text-lg font-semibold mb-1" style="color: var(--text-primary);">Q: ${question}</p>
-            <p class="text-sm italic opacity-70 mb-6" style="color: var(--text-secondary);">${questionEN}</p>
+            <div class="flex items-center gap-2 mb-1">
+                <button onclick="playScenarioAudio('${question.replace(/'/g, "\\'")}', '${useAudio}')" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Play Audio">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-500"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <p class="text-lg font-semibold" style="color: var(--text-primary);">Q: ${question}</p>
+            </div>
+            <p class="text-sm italic opacity-70 mb-6 pl-8" style="color: var(--text-secondary);">${questionEN}</p>
             <div class="grid grid-cols-2 gap-3 mb-6">
                 <button onclick="toggleD('p${i}')" class="text-xs font-semibold uppercase py-3 rounded-lg transition-all duration-200 hover:scale-[1.02]" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2);">Positive</button>
                 <button onclick="toggleD('n${i}')" class="text-xs font-semibold uppercase py-3 rounded-lg transition-all duration-200 hover:scale-[1.02]" style="background: rgba(244, 63, 94, 0.1); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.2);">Negative</button>
             </div>
             <div id="p${i}" class="reveal-section p-4 rounded-lg border-l-4 mb-2" style="background: var(--bg-tertiary); border-left-color: #10b981;">
-                <p class="text-sm font-medium" style="color: var(--text-primary);">${pos}</p>
-                <p class="text-xs italic opacity-70 mt-1" style="color: var(--text-secondary);">${posEN}</p>
+                <div class="flex items-center gap-2">
+                    <p class="text-sm font-medium" style="color: var(--text-primary);">${pos}</p>
+                </div>
+                <p class="text-xs italic opacity-70 mt-1 pl-0" style="color: var(--text-secondary);">${posEN}</p>
             </div>
             <div id="n${i}" class="reveal-section p-4 rounded-lg border-l-4" style="background: var(--bg-tertiary); border-left-color: #f43f5e;">
-                <p class="text-sm font-medium" style="color: var(--text-primary);">${neg}</p>
-                <p class="text-xs italic opacity-70 mt-1" style="color: var(--text-secondary);">${negEN}</p>
+                <div class="flex items-center gap-2">
+                    <p class="text-sm font-medium" style="color: var(--text-primary);">${neg}</p>
+                </div>
+                <p class="text-xs italic opacity-70 mt-1 pl-0" style="color: var(--text-secondary);">${negEN}</p>
 
             </div>
         `;
@@ -1159,9 +1187,65 @@ function renderDialogue() {
     });
 }
 
+let globalAudioCtx;
+
+function playScenarioAudio(text, audioFile) {
+    // If an audio file is provided and we are in the correct mode (which filtered it in renderDialogue), take priority
+    if (audioFile) {
+        if (!globalAudioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            globalAudioCtx = new AudioContext();
+        }
+
+        if (globalAudioCtx.state === 'suspended') {
+            globalAudioCtx.resume();
+        }
+
+        const audio = new Audio(audioFile);
+        audio.crossOrigin = "anonymous";
+
+        const source = globalAudioCtx.createMediaElementSource(audio);
+        const gainNode = globalAudioCtx.createGain();
+
+        // Boost volume: 5.0 (500%) per user request
+        gainNode.gain.value = 5.0;
+
+        source.connect(gainNode);
+        gainNode.connect(globalAudioCtx.destination);
+
+        audio.play().catch(e => {
+            console.error("Failed to play audio file:", e);
+            // Fallback to TTS if file play fails
+            speakTTS(text);
+        });
+        return;
+    }
+
+    speakTTS(text);
+}
+
+function speakTTS(text) {
+    if (!text) return;
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.9;
+        const voices = window.speechSynthesis.getVoices();
+        const jpVoice = voices.find(voice => voice.lang.includes('ja'));
+        if (jpVoice) {
+            utterance.voice = jpVoice;
+        }
+        window.speechSynthesis.speak(utterance);
+    } else {
+        console.warn("Text-to-Speech not supported in this browser.");
+        alert("Audio playback is not supported in this browser.");
+    }
+}
+
 function toggleD(id) {
     const target = document.getElementById(id);
-    const parent = target.parentElement; // div.grid.grid-cols-2... NO wait.
     // DOM structure correction:
     // div.rounded-xl 
     //   h3
@@ -1209,15 +1293,15 @@ function toggleTheme(event) {
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
     );
-
+ 
     const transition = document.startViewTransition(() => updateTheme());
-
+ 
     transition.ready.then(() => {
         const clipPath = [
             `circle(0px at ${x}px ${y}px)`,
             `circle(${endRadius}px at ${x}px ${y}px)`
         ];
-
+ 
         document.documentElement.animate(
             {
                 clipPath: clipPath
