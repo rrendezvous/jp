@@ -436,21 +436,27 @@
                     <!-- Controls -->
                     <div class="flex items-center justify-center gap-8">
                         <button onclick="prevTrack()"
-                            class="rounded-full flex items-center justify-center text-2xl hover:bg-black/5 active:scale-90 transition-all"
+                            class="rounded-full flex items-center justify-center hover:bg-black/5 active:scale-90 transition-all"
                             style="color: var(--text-primary); width: 48px; height: 48px;">
-                            ⏮
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z" />
+                            </svg>
                         </button>
 
                         <button onclick="togglePlay()" id="play-btn"
                             class="rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all text-white"
-                            style="background: linear-gradient(135deg, #667eea, #764ba2); width: 72px; height: 72px; min-width: 72px; min-height: 72px; font-size: 28px;">
-                            ▶
+                            style="background: linear-gradient(135deg, #667eea, #764ba2); width: 72px; height: 72px; min-width: 72px; min-height: 72px;">
+                            <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
                         </button>
 
                         <button onclick="nextTrack()"
-                            class="rounded-full flex items-center justify-center text-2xl hover:bg-black/5 active:scale-90 transition-all"
+                            class="rounded-full flex items-center justify-center hover:bg-black/5 active:scale-90 transition-all"
                             style="color: var(--text-primary); width: 48px; height: 48px;">
-                            ⏭
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 18l8.5-6L6 6v12zm10-12v12h2V6h-2z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -483,99 +489,130 @@
                         <!-- Days 1-10 -->
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Tsuitachi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">1st</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">1st</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Futsuka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">2nd</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">2nd</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Mikka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">3rd</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">3rd</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Yokka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">4th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">4th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Itsuka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">5th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">5th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Muika</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">6th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">6th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nanoka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">7th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">7th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Youka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">8th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">8th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Kokonoka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">9th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">9th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Tooka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">10th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">10th</span>
+                        </div>
                         <!-- Days 11-20 -->
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juuichi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">11th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">11th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juuni-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">12th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">12th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juusan-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">13th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">13th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juuyon-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">14th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">14th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juugo-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">15th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">15th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juuroku-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">16th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">16th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juushichi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">17th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">17th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juuhachi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">18th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">18th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Juukyu-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">19th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">19th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Hatsuka</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">20th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">20th</span>
+                        </div>
                         <!-- Days 21-31 -->
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijuichi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">21st</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">21st</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijuni-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">22nd</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">22nd</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijusan-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">23rd</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">23rd</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijuyon-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">24th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">24th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijugo-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">25th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">25th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijuroku-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">26th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">26th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijushichi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">27th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">27th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijuhachi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">28th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">28th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Nijukyu-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">29th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">29th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Sanjuu-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">30th</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">30th</span>
+                        </div>
                         <div class="flex justify-between p-3 rounded-lg" style="background: rgba(99, 102, 241, 0.05);">
                             <span class="font-medium" style="color: var(--text-primary);">Sanjuichi-nichi</span><span
-                                class="opacity-50" style="color: var(--text-secondary);">31st</span></div>
+                                class="opacity-50" style="color: var(--text-secondary);">31st</span>
+                        </div>
                     </div>
                 </div>
             </div>
