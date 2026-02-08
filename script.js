@@ -606,17 +606,172 @@ function toggleMobileMenu() {
     }
 }
 
+// AUDIO PLAYER LOGIC
+const tracks = [
+    {
+        title: "Tsuitachi - 1st Day v1",
+        src: "assets/audio/Tsuitachi - 1st day.mp3"
+    },
+    {
+        title: "Tsuitachi - 1st Day v2",
+        src: "assets/audio/Tsuitachi - 1st day 2.mp3"
+    }
+];
 
+let currentTrackIndex = 0;
+let isPlaying = false;
+let audioPlayer = null;
+
+function initAudioPlayer() {
+    audioPlayer = document.getElementById('audio-player');
+    if (!audioPlayer) return;
+
+    audioPlayer.addEventListener('timeupdate', updateProgress);
+    audioPlayer.addEventListener('ended', nextTrack);
+
+    // Progress bar interaction
+    const progressContainer = document.getElementById('progress-container');
+    if (progressContainer) {
+        progressContainer.addEventListener('click', setProgress);
+    }
+
+    renderTrackList();
+    loadTrack(currentTrackIndex, false);
+}
+
+function loadTrack(index, autoPlay = true) {
+    if (index < 0 || index >= tracks.length) return;
+
+    currentTrackIndex = index;
+    const track = tracks[index];
+
+    document.getElementById('track-title').textContent = track.title;
+    audioPlayer.src = track.src;
+
+    // Update active track in list
+    document.querySelectorAll('.track-item').forEach((item, i) => {
+        if (i === index) {
+            item.classList.add('playing');
+            const icon = item.querySelector('.track-icon');
+            if (icon) icon.textContent = isPlaying ? '🔊' : '🎵';
+        } else {
+            item.classList.remove('playing');
+            const icon = item.querySelector('.track-icon');
+            if (icon) icon.textContent = '🎵';
+        }
+    });
+
+    if (autoPlay) {
+        playTrack();
+    }
+}
+
+function togglePlay() {
+    if (isPlaying) {
+        pauseTrack();
+    } else {
+        playTrack();
+    }
+}
+
+function playTrack() {
+    isPlaying = true;
+    audioPlayer.play().catch(e => console.log("Audio play failed (file might be missing):", e));
+    document.getElementById('play-btn').textContent = '⏸';
+    document.getElementById('listening-section').classList.add('playing');
+    updateTrackIcon(true);
+}
+
+function pauseTrack() {
+    isPlaying = false;
+    audioPlayer.pause();
+    document.getElementById('play-btn').textContent = '▶';
+    document.getElementById('listening-section').classList.remove('playing');
+    updateTrackIcon(false);
+}
+
+function prevTrack() {
+    let newIndex = currentTrackIndex - 1;
+    if (newIndex < 0) newIndex = tracks.length - 1;
+    loadTrack(newIndex);
+}
+
+function nextTrack() {
+    let newIndex = currentTrackIndex + 1;
+    if (newIndex >= tracks.length) newIndex = 0;
+    loadTrack(newIndex);
+}
+
+function updateProgress(e) {
+    const { duration, currentTime } = e.srcElement;
+    if (isNaN(duration)) return;
+
+    const progressPercent = (currentTime / duration) * 100;
+    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+    document.getElementById('current-time').textContent = formatTime(currentTime);
+    document.getElementById('duration').textContent = formatTime(duration);
+}
+
+function setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audioPlayer.duration;
+
+    if (isNaN(duration)) return;
+
+    audioPlayer.currentTime = (clickX / width) * duration;
+}
+
+function formatTime(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+}
+
+function renderTrackList() {
+    const list = document.getElementById('track-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+    tracks.forEach((track, index) => {
+        const item = document.createElement('div');
+        item.className = 'track-item flex items-center gap-3 p-3 rounded-xl border border-transparent';
+        item.onclick = () => loadTrack(index);
+
+        item.innerHTML = `
+            <span class="track-icon text-lg opacity-70">🎵</span>
+            <div class="flex-1">
+                <p class="text-sm font-semibold" style="color: var(--text-primary);">${track.title}</p>
+                <p class="text-xs opacity-60" style="color: var(--text-secondary);">Audio Track</p>
+            </div>
+            <button class="opacity-0 group-hover:opacity-100 transition-opacity">
+                ▶
+            </button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function updateTrackIcon(playing) {
+    const activeItem = document.querySelectorAll('.track-item')[currentTrackIndex];
+    if (activeItem) {
+        const icon = activeItem.querySelector('.track-icon');
+        if (icon) icon.textContent = playing ? '🔊' : '🎵';
+    }
+}
 
 function switchTab(t) {
     document.getElementById('flashcards-section').classList.toggle('hidden', t !== 'flashcards');
     document.getElementById('quiz-section').classList.toggle('hidden', t !== 'quiz');
     document.getElementById('dialogue-section').classList.toggle('hidden', t !== 'dialogue');
+    document.getElementById('listening-section').classList.toggle('hidden', t !== 'listening');
 
     // Update desktop tabs styling
     const desktopFlashcardsTab = document.getElementById('tab-flashcards');
     const desktopQuizTab = document.getElementById('tab-quiz');
     const desktopDialogueTab = document.getElementById('tab-dialogue');
+    const desktopListeningTab = document.getElementById('tab-listening');
 
     if (desktopFlashcardsTab && desktopQuizTab && desktopDialogueTab) {
         desktopFlashcardsTab.className = t === 'flashcards' ? 'tab-active pb-2 transition-all duration-200 border-b-2' : 'pb-2 opacity-60 hover:opacity-100 transition-all duration-200 border-b-2 border-transparent';
@@ -624,10 +779,15 @@ function switchTab(t) {
         desktopDialogueTab.className = t === 'dialogue' ? 'tab-active pb-2 transition-all duration-200 border-b-2' : 'pb-2 opacity-60 hover:opacity-100 transition-all duration-200 border-b-2 border-transparent';
     }
 
+    if (desktopListeningTab) {
+        desktopListeningTab.className = t === 'listening' ? 'tab-active pb-2 transition-all duration-200 border-b-2' : 'pb-2 opacity-60 hover:opacity-100 transition-all duration-200 border-b-2 border-transparent';
+    }
+
     // Update mobile tabs styling
     const mobileFlashcardsTab = document.getElementById('mobile-tab-flashcards');
     const mobileQuizTab = document.getElementById('mobile-tab-quiz');
     const mobileDialogueTab = document.getElementById('mobile-tab-dialogue');
+    const mobileListeningTab = document.getElementById('mobile-tab-listening');
 
     if (mobileFlashcardsTab && mobileQuizTab && mobileDialogueTab) {
         mobileFlashcardsTab.classList.toggle('active', t === 'flashcards');
@@ -635,9 +795,15 @@ function switchTab(t) {
         mobileDialogueTab.classList.toggle('active', t === 'dialogue');
     }
 
+    if (mobileListeningTab) {
+        mobileListeningTab.classList.toggle('active', t === 'listening');
+    }
+
     if (t === 'dialogue') renderDialogue();
     if (t === 'quiz') resetQuiz();
+    if (t === 'listening' && (!audioPlayer)) initAudioPlayer();
 }
+
 
 function toggleMode() {
     flashMode = flashMode === 'JtoE' ? 'EtoJ' : 'JtoE';
