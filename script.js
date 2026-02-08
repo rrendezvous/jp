@@ -360,7 +360,7 @@ const nums11to20 = [
     { j: "Juuyon", e: "14", c: "numbers-11-20" },
     { j: "Juugo", e: "15", c: "numbers-11-20" },
     { j: "Juuroku", e: "16", c: "numbers-11-20" },
-    { j: "Juushichi", e: "17", c: "numbers-11-20" },
+    { j: "Juunana", e: "17", c: "numbers-11-20" },
     { j: "Juuhachi", e: "18", c: "numbers-11-20" },
     { j: "Juukyu", e: "19", c: "numbers-11-20" },
     { j: "Nijuu", e: "20", c: "numbers-11-20" }
@@ -375,7 +375,7 @@ const nums21to30 = [
     { j: "Nijuyon", e: "24", c: "numbers-21-30" },
     { j: "Nijugo", e: "25", c: "numbers-21-30" },
     { j: "Nijuroku", e: "26", c: "numbers-21-30" },
-    { j: "Nijushichi", e: "27", c: "numbers-21-30" },
+    { j: "Nijunana", e: "27", c: "numbers-21-30" },
     { j: "Nijuhachi", e: "28", c: "numbers-21-30" },
     { j: "Nijukyu", e: "29", c: "numbers-21-30" },
     { j: "Sanjuu", e: "30", c: "numbers-21-30" }
@@ -390,7 +390,7 @@ const nums31to40 = [
     { j: "Sanjuyon", e: "34", c: "numbers-31-40" },
     { j: "Sanjugo", e: "35", c: "numbers-31-40" },
     { j: "Sanjuroku", e: "36", c: "numbers-31-40" },
-    { j: "Sanjushichi", e: "37", c: "numbers-31-40" },
+    { j: "Sanjunana", e: "37", c: "numbers-31-40" },
     { j: "Sanjuhachi", e: "38", c: "numbers-31-40" },
     { j: "Sanjukyu", e: "39", c: "numbers-31-40" },
     { j: "Yonjuu", e: "40", c: "numbers-31-40" }
@@ -405,7 +405,7 @@ const nums41to50 = [
     { j: "Yonjuyon", e: "44", c: "numbers-41-50" },
     { j: "Yonjugo", e: "45", c: "numbers-41-50" },
     { j: "Yonjuroku", e: "46", c: "numbers-41-50" },
-    { j: "Yonjushichi", e: "47", c: "numbers-41-50" },
+    { j: "Yonjunana", e: "47", c: "numbers-41-50" },
     { j: "Yonjuhachi", e: "48", c: "numbers-41-50" },
     { j: "Yonjukyu", e: "49", c: "numbers-41-50" },
     { j: "Gojuu", e: "50", c: "numbers-41-50" }
@@ -420,7 +420,7 @@ const nums51to60 = [
     { j: "Gojuyon", e: "54", c: "numbers-51-60" },
     { j: "Gojugo", e: "55", c: "numbers-51-60" },
     { j: "Gojuroku", e: "56", c: "numbers-51-60" },
-    { j: "Gojushichi", e: "57", c: "numbers-51-60" },
+    { j: "Gojunana", e: "57", c: "numbers-51-60" },
     { j: "Gojuhachi", e: "58", c: "numbers-51-60" },
     { j: "Gojukyu", e: "59", c: "numbers-51-60" },
     { j: "Rokujuu", e: "60", c: "numbers-51-60" }
@@ -435,7 +435,7 @@ const nums61to70 = [
     { j: "Rokujuyon", e: "64", c: "numbers-61-70" },
     { j: "Rokujugo", e: "65", c: "numbers-61-70" },
     { j: "Rokujuroku", e: "66", c: "numbers-61-70" },
-    { j: "Rokujushichi", e: "67", c: "numbers-61-70" },
+    { j: "Rokujunana", e: "67", c: "numbers-61-70" },
     { j: "Rokujuhachi", e: "68", c: "numbers-61-70" },
     { j: "Rokujukyu", e: "69", c: "numbers-61-70" },
     { j: "Nanajuu", e: "70", c: "numbers-61-70" }
@@ -450,7 +450,7 @@ const nums71to80 = [
     { j: "Nanajuyon", e: "74", c: "numbers-71-80" },
     { j: "Nanajugo", e: "75", c: "numbers-71-80" },
     { j: "Nanajuroku", e: "76", c: "numbers-71-80" },
-    { j: "Nanajushichi", e: "77", c: "numbers-71-80" },
+    { j: "Nanajunana", e: "77", c: "numbers-71-80" },
     { j: "Nanajuhachi", e: "78", c: "numbers-71-80" },
     { j: "Nanajukyu", e: "79", c: "numbers-71-80" },
     { j: "Hachijuu", e: "80", c: "numbers-71-80" }
@@ -465,7 +465,7 @@ const nums81to90 = [
     { j: "Hachijuyon", e: "84", c: "numbers-81-90" },
     { j: "Hachijugo", e: "85", c: "numbers-81-90" },
     { j: "Hachijuroku", e: "86", c: "numbers-81-90" },
-    { j: "Hachijushichi", e: "87", c: "numbers-81-90" },
+    { j: "Hachijunana", e: "87", c: "numbers-81-90" },
     { j: "Hachijuhachi", e: "88", c: "numbers-81-90" },
     { j: "Hachijukyu", e: "89", c: "numbers-81-90" },
     { j: "Kyujuu", e: "90", c: "numbers-81-90" }
@@ -480,7 +480,7 @@ const nums91to100 = [
     { j: "Kyujuyon", e: "94", c: "numbers-91-100" },
     { j: "Kyujugo", e: "95", c: "numbers-91-100" },
     { j: "Kyujuroku", e: "96", c: "numbers-91-100" },
-    { j: "Kyujushichi", e: "97", c: "numbers-91-100" },
+    { j: "Kyujunana", e: "97", c: "numbers-91-100" },
     { j: "Kyujuhachi", e: "98", c: "numbers-91-100" },
     { j: "Kyujukyu", e: "99", c: "numbers-91-100" },
     { j: "Hyaku", e: "100", c: "numbers-91-100" }
@@ -509,7 +509,7 @@ const numThousands = [
     { j: "Yonsen", e: "4,000", c: "numbers-thousands" },
     { j: "Gosen", e: "5,000", c: "numbers-thousands" },
     { j: "Rokusen", e: "6,000", c: "numbers-thousands" },
-    { j: "Shichisen", e: "7,000", c: "numbers-thousands" },
+    { j: "Nanasen", e: "7,000", c: "numbers-thousands" },
     { j: "Hassen", e: "8,000", c: "numbers-thousands" },
     { j: "Kyusen", e: "9,000", c: "numbers-thousands" },
     { j: "Ichiman", e: "10,000", c: "numbers-thousands" }
