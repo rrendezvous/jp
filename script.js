@@ -18,7 +18,6 @@ const vocabulary = [
     { j: "Oboete", e: "Remember / Memorize (Request)", c: "understanding" },
     { j: "Oboeteinai", e: "I don't remember", c: "understanding" },
     { j: "Wakarimasen", e: "I don't understand", c: "understanding" },
-    { j: "Oboeteinai", e: "I don't remember", c: "understanding" },
     { j: "Wakatta", e: "I got it (casual)", c: "understanding" },
     { j: "Shiranai", e: "I don't know (casual)", c: "understanding" },
     { j: "Naruhodo ne", e: "I see (casual)", c: "understanding" },
@@ -135,6 +134,7 @@ const vocabulary = [
     { j: "Chigaimasu", e: "That's wrong", c: "responses" },
     { j: "Chotto chigau", e: "A little different", c: "responses" },
     { j: "Sou ka mo", e: "Maybe", c: "responses" },
+    { j: "Yorokonde", e: "With pleasure", c: "responses" },
 
     // WORRY & CONCERN
     { j: "Kinishinaide", e: "Don't worry (about it)", c: "concern" },
@@ -162,7 +162,6 @@ const vocabulary = [
     { j: "Chotto dake matte", e: "Wait a little", c: "patience" },
     { j: "Shou shou omachi kudasai", e: "Please wait a moment", c: "patience" },
     { j: "Omatase shimashita", e: "Sorry to keep you waiting", c: "patience" },
-    { j: "Yorokonde", e: "With pleasure", c: "patience" },
 
     // DIFFICULTY & EASE
     { j: "Muzukashii desu", e: "It's difficult", c: "difficulty" },
@@ -186,7 +185,7 @@ const vocabulary = [
     { j: "Yoroshiku onegaishimasu", e: "Please take care of me", c: "inquiry" },
     { j: "Mou ichido onegaishimasu", e: "Please say it again", c: "inquiry" },
     { j: "Kashikomarimashita", e: "Certainly / Understood", c: "inquiry" },
-    { j: "Seito sensei", e: "Teacher (name)", c: "inquiry" },
+    { j: "Sensei", e: "Teacher", c: "inquiry" },
 
     // SPECIAL OCCASIONS
     { j: "Otanjoubi omedetou", e: "Happy birthday", c: "occasions" },
