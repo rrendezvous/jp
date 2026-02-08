@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Exam Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flip-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            background: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-color: #f8fafc;
+        }
+
+        .reveal-section {
+            display: none;
+        }
+
+        .reveal-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #2563eb;
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-20 font-sans">
+
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-30 bg-white border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center py-3 gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl font-black italic tracking-tighter text-blue-600">JP MASTER</span>
+                </div>
+
+                <div class="flex gap-6 text-sm font-bold uppercase tracking-tight overflow-x-auto whitespace-nowrap">
+                    <button onclick="switchTab('flashcards')" id="tab-flashcards"
+                        class="tab-active pb-1 transition-all">Flashcards</button>
+                    <button onclick="switchTab('quiz')" id="tab-quiz"
+                        class="pb-1 text-slate-400 hover:text-slate-600 transition-all">Quiz Mode</button>
+                    <button onclick="switchTab('dialogue')" id="tab-dialogue"
+                        class="pb-1 text-slate-400 hover:text-slate-600 transition-all">Dialogue Practice</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FLASHCARD SECTION -->
+    <section id="flashcards-section" class="max-w-6xl mx-auto px-4 mt-6">
+        <div
+            class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <div class="flex bg-slate-100 p-1 rounded-lg w-full md:w-auto">
+                <button id="modeJtoE" onclick="setMode('JtoE')"
+                    class="flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600">JAP
+                    → ENG</button>
+                <button id="modeEtoJ" onclick="setMode('EtoJ')"
+                    class="flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500">ENG →
+                    JAP</button>
+            </div>
+
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <select id="catSelect" onchange="filterCards()"
+                    class="w-full md:w-64 text-xs font-bold border border-slate-200 rounded-lg p-2.5 bg-slate-50 outline-none focus:ring-2 focus:ring-blue-500 uppercase">
+                    <option value="all">All Categories</option>
+                    <option value="chat">Chat Log (Images)</option>
+                    <option value="grammar">Grammar & Rules</option>
+                    <option value="family">Family Members</option>
+                    <option value="pronouns">Pronouns</option>
+                    <option value="body">Body Parts</option>
+                    <option value="colors">Colors</option>
+                    <option value="calendar">Days / Months / Dates</option>
+                    <option value="time">Time (Hours / Mins)</option>
+                    <option value="money">Money</option>
+                    <option value="numbers">Numbers (1-100+)</option>
+                </select>
+                <div id="card-count"
+                    class="hidden sm:flex text-[10px] items-center bg-blue-50 text-blue-700 px-4 py-2.5 rounded-lg font-black uppercase whitespace-nowrap">
+                    0 CARDS
+                </div>
+            </div>
+        </div>
+
+        <div id="card-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Cards generated by JS -->
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section id="quiz-section" class="hidden max-w-2xl mx-auto px-4 mt-6">
+        <!-- Quiz Config -->
+        <div id="quiz-setup" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-center">
+            <h2 class="text-2xl font-black mb-2">Quiz Setup</h2>
+            <p class="text-slate-500 text-sm mb-6">Select the categories you want to include in your quiz.</p>
+
+            <div id="quiz-categories" class="grid grid-cols-2 gap-2 text-left mb-8">
+                <!-- Checkboxes generated by JS -->
+            </div>
+
+            <div class="flex bg-slate-100 p-1 rounded-lg mb-6 max-w-xs mx-auto">
+                <button id="qModeJtoE" onclick="setQuizMode('JtoE')"
+                    class="flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600">JAP
+                    → ENG</button>
+                <button id="qModeEtoJ" onclick="setQuizMode('EtoJ')"
+                    class="flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500">ENG → JAP</button>
+            </div>
+
+            <button onclick="startQuiz()"
+                class="w-full py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                Start Quiz
+            </button>
+        </div>
+
+        <!-- Active Quiz -->
+        <div id="quiz-active" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <button onclick="endQuiz()"
+                    class="text-xs font-bold text-slate-400 hover:text-red-500 uppercase tracking-widest">Quit
+                    Quiz</button>
+                <div id="quiz-progress" class="text-xs font-black bg-slate-100 px-4 py-1 rounded-full uppercase">0 / 0
+                </div>
+            </div>
+
+            <div class="perspective-1000 h-64 mb-8">
+                <div id="quiz-card" class="flip-card-inner" onclick="this.classList.toggle('is-flipped')">
+                    <div class="flip-card-front text-center">
+                        <span class="text-[10px] font-black uppercase text-slate-300 mb-2">Question</span>
+                        <p id="quiz-front-text" class="text-3xl font-bold tracking-tight px-4"></p>
+                        <p class="text-[10px] text-slate-400 mt-6 uppercase font-bold italic">Tap to flip</p>
+                    </div>
+                    <div class="flip-card-back text-center">
+                        <span class="text-[10px] font-black uppercase text-blue-400 mb-2">Answer</span>
+                        <p id="quiz-back-text" class="text-3xl font-black text-blue-600 tracking-tighter px-4"></p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="nextQuizCard()"
+                class="w-full py-4 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-black transition">
+                Next Card
+            </button>
+        </div>
+
+        <!-- Quiz Result -->
+        <div id="quiz-result" class="hidden bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-center">
+            <h2 class="text-4xl font-black mb-2">🎉 Finished!</h2>
+            <p class="text-slate-500 mb-8">You've completed all the cards in your selection.</p>
+            <button onclick="switchTab('quiz')"
+                class="w-full py-4 bg-blue-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-blue-700 transition">
+                Study Again
+            </button>
+        </div>
+    </section>
+
+    <!-- DIALOGUE SECTION -->
+    <section id="dialogue-section" class="hidden max-w-3xl mx-auto px-4 mt-6">
+        <div class="bg-blue-600 text-white p-6 rounded-3xl mb-8 shadow-xl">
+            <h2 class="text-xs font-black uppercase tracking-[0.2em] mb-3 opacity-80">Grammar Core</h2>
+            <p class="text-xl font-bold mb-4">Switching Perspectives</p>
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white/10 p-3 rounded-xl text-center border border-white/10">
+                    <p class="text-[10px] uppercase opacity-60">Speaker says</p>
+                    <p class="font-bold">Kono</p>
+                </div>
+                <div class="flex items-center justify-center text-2xl">↔</div>
+                <div class="bg-white/10 p-3 rounded-xl text-center border border-white/10">
+                    <p class="text-[10px] uppercase opacity-60">Listener says</p>
+                    <p class="font-bold">Sono</p>
+                </div>
+            </div>
+            <p class="mt-6 text-[10px] font-medium opacity-80 italic text-center uppercase tracking-widest">"Ano hito"
+                remains "Ano hito" for both people.</p>
+        </div>
+
+        <div id="dialogue-list" class="space-y-6">
+            <!-- Scenarios generated by JS -->
+        </div>
+    </section>
+
+    <script>
+        const vocabulary = [
+            // CHAT LOG
+            { j: "Yatta", e: "I did it! / Yay!", c: "chat" },
+            { j: "Oboite", e: "Remember / Memorize", c: "chat" },
+            { j: "Mondai nai", e: "No problem", c: "chat" },
+            { j: "Kamai masen", e: "I don't mind", c: "chat" },
+            { j: "Kinishinaide", e: "Don't worry", c: "chat" },
+            { j: "Shinpaishinaide", e: "Don't be anxious", c: "chat" },
+            { j: "Naruhodo", e: "I see / Understood", c: "chat" },
+            { j: "Dame", e: "No / Forbidden", c: "chat" },
+            { j: "Zenzen", e: "Not at all", c: "chat" },
+            { j: "Takusan", e: "A lot / Many", c: "chat" },
+            { j: "Tokidoki", e: "Sometimes", c: "chat" },
+            { j: "Yoku", e: "Often", c: "chat" },
+            { j: "Tamani", e: "Occasionally", c: "chat" },
+            { j: "Amari", e: "Not much", c: "chat" },
+
+            // GRAMMAR
+            { j: "Hai", e: "Yes", c: "grammar" },
+            { j: "Iie", e: "No", c: "grammar" },
+            { j: "Kono hito", e: "This person (near me)", c: "grammar" },
+            { j: "Sono hito", e: "That person (near you)", c: "grammar" },
+            { j: "Ano hito", e: "That person (far away)", c: "grammar" },
+            { j: "De wa arimasen", e: "Is not (Negative person)", c: "grammar" },
+            { j: "Watashi", e: "I / Me", c: "grammar" },
+            { j: "Anata", e: "You", c: "grammar" },
+
+            // FAMILY
+            { j: "Chichi", e: "My Father", c: "family" },
+            { j: "Haha", e: "My Mother", c: "family" },
+            { j: "Otousan", e: "Father (Polite)", c: "family" },
+            { j: "Okaasan", e: "Mother (Polite)", c: "family" },
+            { j: "Ani", e: "Older Brother", c: "family" },
+            { j: "Ane", e: "Older Sister", c: "family" },
+            { j: "Otouto", e: "Younger Brother", c: "family" },
+            { j: "Imouto", e: "Younger Sister", c: "family" },
+            { j: "Ojiisan", e: "Grandfather", c: "family" },
+            { j: "Obaasan", e: "Grandmother", c: "family" },
+            { j: "Kazoku", e: "Family", c: "family" },
+
+            // BODY
+            { j: "Atama", e: "Head", c: "body" },
+            { j: "Kao", e: "Face", c: "body" },
+            { j: "Me", e: "Eye", c: "body" },
+            { j: "Mimi", e: "Ear", c: "body" },
+            { j: "Hana", e: "Nose", c: "body" },
+            { j: "Kuchi", e: "Mouth", c: "body" },
+            { j: "Te", e: "Hand", c: "body" },
+            { j: "Yubi", e: "Finger", c: "body" },
+            { j: "Ude", e: "Arm", c: "body" },
+            { j: "Ashi", e: "Foot/Leg", c: "body" },
+
+            // COLORS
+            { j: "Shiro", e: "White", c: "colors" },
+            { j: "Kuro", e: "Black", c: "colors" },
+            { j: "Aka", e: "Red", c: "colors" },
+            { j: "Ao", e: "Blue", c: "colors" },
+            { j: "Midori", e: "Green", c: "colors" },
+            { j: "Kiiro", e: "Yellow", c: "colors" },
+            { j: "Chairo", e: "Brown", c: "colors" },
+
+            // CALENDAR
+            { j: "Nichiyoubi", e: "Sunday", c: "calendar" },
+            { j: "Getsuyoubi", e: "Monday", c: "calendar" },
+            { j: "Kayoubi", e: "Tuesday", c: "calendar" },
+            { j: "Suiyoubi", e: "Wednesday", c: "calendar" },
+            { j: "Mokuyoubi", e: "Thursday", c: "calendar" },
+            { j: "Kinyoubi", e: "Friday", c: "calendar" },
+            { j: "Douyoubi", e: "Saturday", c: "calendar" },
+            { j: "Ichigatsu", e: "January", c: "calendar" },
+            { j: "Juunigatsu", e: "December", c: "calendar" },
+            { j: "Tsuitachi", e: "1st day", c: "calendar" },
+            { j: "Futsuka", e: "2nd day", c: "calendar" },
+            { j: "Mikka", e: "3rd day", c: "calendar" },
+            { j: "Yokka", e: "4th day", c: "calendar" },
+            { j: "Itsuka", e: "5th day", c: "calendar" },
+            { j: "Muika", e: "6th day", c: "calendar" },
+            { j: "Nanoka", e: "7th day", c: "calendar" },
+            { j: "Youka", e: "8th day", c: "calendar" },
+            { j: "Kokonoka", e: "9th day", c: "calendar" },
+            { j: "Tooka", e: "10th day", c: "calendar" },
+            { j: "Hatsuka", e: "20th day", c: "calendar" },
+
+            // TIME & SPECIFICATIONS
+            { j: "Ichi-ji", e: "1:00", c: "time" },
+            { j: "Yo-ji", e: "4:00", c: "time" },
+            { j: "Shichi-ji", e: "7:00", c: "time" },
+            { j: "Ku-ji", e: "9:00", c: "time" },
+            { j: "Ippun", e: "1 min", c: "time" },
+            { j: "Juppun", e: "10 min", c: "time" },
+            { j: "Sanjuu pun", e: "30 min", c: "time" },
+            { j: "Ichi-ji Ippun", e: "1:01", c: "time" },
+            { j: "Ichi-ji Juppun", e: "1:10", c: "time" },
+            { j: "Ichi-ji Juu Ippun", e: "1:11", c: "time" },
+            { j: "Ichi-ji Sanjuu Pun", e: "1:30", c: "time" },
+            { j: "Ni-ji Go-fun", e: "2:05", c: "time" },
+            { j: "San-ji Juugo-fun", e: "3:15", c: "time" },
+            { j: "Yo-ji Nijuu-pun", e: "4:20", c: "time" },
+
+            // MONEY
+            { j: "Okane", e: "Money", c: "money" },
+            { j: "Ichi en", e: "1 Yen", c: "money" },
+            { j: "Go en", e: "5 Yen", c: "money" },
+            { j: "Juu en", e: "10 Yen", c: "money" },
+            { j: "Hyaku en", e: "100 Yen", c: "money" },
+            { j: "Sen en", e: "1,000 Yen", c: "money" },
+            { j: "Ichiman en", e: "10,000 Yen", c: "money" }
+        ];
+
+        // Numbers Logic
+        const b = ["", "Ichi", "Ni", "San", "Yon", "Go", "Roku", "Nana", "Hachi", "Kyuu"];
+        for (let i = 1; i <= 100; i++) {
+            let n = "";
+            if (i === 100) n = "Hyaku";
+            else if (i < 10) n = b[i];
+            else if (i === 10) n = "Juu";
+            else {
+                let t = Math.floor(i / 10);
+                let o = i % 10;
+                n = (t === 1 ? "" : b[t]) + " Juu" + (o === 0 ? "" : " " + b[o]);
+            }
+            vocabulary.push({ j: n, e: i.toString(), c: "numbers" });
+        }
+        const extraNums = [
+            { j: "Zero / Rei", e: "0" }, { j: "Ni Juu Ichi", e: "21" }, { j: "San Juu Ichi", e: "31" }, { j: "Yon Juu Ichi", e: "41" },
+            { j: "Hyaku Ichi", e: "101" }, { j: "Sen", e: "1000" }, { j: "Ichiman", e: "10000" }, { j: "Ichiman Ichi", e: "10001" },
+            { j: "Ichiman Juu Ichi", e: "10011" }, { j: "Ichiman Hyaku Juu Ichi", e: "10111" }, { j: "Ichiman Sen Hyaku Juu Ichi", e: "11111" }
+        ];
+        extraNums.forEach(num => vocabulary.push({ ...num, c: "numbers" }));
+
+        // Scenarios
+        const scenarios = [
+            {
+                title: "Okaasan (Mother)",
+                question: "Kono hito wa watashi no okaasan desu ka?",
+                pos: "Hai, sono hito wa anata no okaasan desu.",
+                neg: "Iie, sono hito wa anata no okaasan de wa arimasen.",
+                correction: "Sono hito wa watashi no tomodachi desu."
+            },
+            {
+                title: "Tomodachi (Friend)",
+                question: "Sono hito wa watashi no tomodachi desu ka?",
+                pos: "Hai, kono hito wa anata no tomodachi desu.",
+                neg: "Iie, kono hito wa anata no tomodachi de wa arimasen.",
+                correction: "Kono hito wa watashi no senpai desu."
+            },
+            {
+                title: "Senpai (Senior)",
+                question: "Ano hito wa watashi no senpai desu ka?",
+                pos: "Hai, ano hito wa anata no senpai desu.",
+                neg: "Iie, ano hito wa anata no senpai de wa arimasen.",
+                correction: "Ano hito wa watashi no sensei desu."
+            }
+        ];
+
+        let flashMode = 'JtoE';
+        let quizMode = 'JtoE';
+        let quizPool = [];
+        let quizIndex = 0;
+
+        function switchTab(t) {
+            document.getElementById('flashcards-section').classList.toggle('hidden', t !== 'flashcards');
+            document.getElementById('quiz-section').classList.toggle('hidden', t !== 'quiz');
+            document.getElementById('dialogue-section').classList.toggle('hidden', t !== 'dialogue');
+
+            document.getElementById('tab-flashcards').className = t === 'flashcards' ? 'tab-active pb-1 transition-all' : 'pb-1 text-slate-400 hover:text-slate-600 transition-all';
+            document.getElementById('tab-quiz').className = t === 'quiz' ? 'tab-active pb-1 transition-all' : 'pb-1 text-slate-400 hover:text-slate-600 transition-all';
+            document.getElementById('tab-dialogue').className = t === 'dialogue' ? 'tab-active pb-1 transition-all' : 'pb-1 text-slate-400 hover:text-slate-600 transition-all';
+
+            if (t === 'dialogue') renderDialogue();
+            if (t === 'quiz') resetQuiz();
+        }
+
+        function setMode(m) {
+            flashMode = m;
+            document.getElementById('modeJtoE').className = m === 'JtoE' ? 'flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600' : 'flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500';
+            document.getElementById('modeEtoJ').className = m === 'EtoJ' ? 'flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600' : 'flex-1 md:flex-none px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500';
+            filterCards();
+        }
+
+        function setQuizMode(m) {
+            quizMode = m;
+            document.getElementById('qModeJtoE').className = m === 'JtoE' ? 'flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600' : 'flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500';
+            document.getElementById('qModeEtoJ').className = m === 'EtoJ' ? 'flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition bg-white shadow-sm text-blue-600' : 'flex-1 px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-500';
+        }
+
+        function filterCards() {
+            const cat = document.getElementById('catSelect').value;
+            const grid = document.getElementById('card-grid');
+            grid.innerHTML = '';
+            const filtered = cat === 'all' ? vocabulary : vocabulary.filter(v => v.c === cat);
+            document.getElementById('card-count').innerText = `${filtered.length} CARDS`;
+
+            filtered.forEach(item => {
+                const f = flashMode === 'JtoE' ? item.j : item.e;
+                const b = flashMode === 'JtoE' ? item.e : item.j;
+                const card = document.createElement('div');
+                card.className = 'perspective-1000 h-24';
+                card.innerHTML = `
+                    <div class="flip-card-inner" onclick="this.classList.toggle('is-flipped')">
+                        <div class="flip-card-front text-center">
+                            <p class="text-[11px] font-bold tracking-tight">${f}</p>
+                        </div>
+                        <div class="flip-card-back text-center">
+                            <p class="text-[11px] font-black text-blue-600 uppercase">${b}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-setup').classList.remove('hidden');
+            document.getElementById('quiz-active').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+
+            const cats = [...new Set(vocabulary.map(v => v.c))];
+            const container = document.getElementById('quiz-categories');
+            container.innerHTML = '';
+
+            cats.forEach(cat => {
+                const label = document.createElement('label');
+                label.className = "flex items-center gap-2 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition";
+                label.innerHTML = `
+                    <input type="checkbox" value="${cat}" checked class="w-4 h-4 accent-blue-600">
+                    <span class="text-[11px] font-black uppercase tracking-widest text-slate-500">${cat.replace('_', ' ')}</span>
+                `;
+                container.appendChild(label);
+            });
+        }
+
+        function startQuiz() {
+            const selectedCats = Array.from(document.querySelectorAll('#quiz-categories input:checked')).map(i => i.value);
+            if (selectedCats.length === 0) return;
+
+            quizPool = vocabulary.filter(v => selectedCats.includes(v.c)).sort(() => Math.random() - 0.5);
+            quizIndex = 0;
+
+            if (quizPool.length === 0) return;
+
+            document.getElementById('quiz-setup').classList.add('hidden');
+            document.getElementById('quiz-active').classList.remove('hidden');
+            updateQuizCard();
+        }
+
+        function updateQuizCard() {
+            const item = quizPool[quizIndex];
+            const card = document.getElementById('quiz-card');
+            card.classList.remove('is-flipped');
+
+            const fText = quizMode === 'JtoE' ? item.j : item.e;
+            const bText = quizMode === 'JtoE' ? item.e : item.j;
+
+            document.getElementById('quiz-front-text').innerText = fText;
+            document.getElementById('quiz-back-text').innerText = bText;
+            document.getElementById('quiz-progress').innerText = `${quizIndex + 1} / ${quizPool.length}`;
+        }
+
+        function nextQuizCard() {
+            quizIndex++;
+            if (quizIndex >= quizPool.length) {
+                document.getElementById('quiz-active').classList.add('hidden');
+                document.getElementById('quiz-result').classList.remove('hidden');
+            } else {
+                updateQuizCard();
+            }
+        }
+
+        function endQuiz() {
+            switchTab('quiz');
+        }
+
+        function renderDialogue() {
+            const list = document.getElementById('dialogue-list');
+            list.innerHTML = '';
+            scenarios.forEach((s, i) => {
+                const div = document.createElement('div');
+                div.className = "bg-white border border-slate-200 rounded-3xl p-6 shadow-sm";
+                div.innerHTML = `
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">${s.title}</h3>
+                    <p class="text-lg font-bold text-slate-800 mb-4">Q: ${s.question}</p>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <button onclick="toggleD('p${i}')" class="bg-green-50 text-green-700 text-[10px] font-black uppercase py-3 rounded-xl border border-green-100">Positive</button>
+                        <button onclick="toggleD('n${i}')" class="bg-red-50 text-red-700 text-[10px] font-black uppercase py-3 rounded-xl border border-red-100">Negative</button>
+                    </div>
+                    <div id="p${i}" class="reveal-section bg-slate-50 p-4 rounded-xl border-l-4 border-green-500 mb-2">
+                        <p class="text-sm font-bold text-slate-900">${s.pos}</p>
+                    </div>
+                    <div id="n${i}" class="reveal-section bg-slate-50 p-4 rounded-xl border-l-4 border-red-500">
+                        <p class="text-sm font-bold text-slate-900">${s.neg}</p>
+                        <p class="text-[10px] text-slate-500 mt-2 italic">Correction: ${s.correction}</p>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function toggleD(id) {
+            const target = document.getElementById(id);
+            const parent = target.parentElement;
+            parent.querySelectorAll('.reveal-section').forEach(s => { if (s.id !== id) s.classList.remove('active'); });
+            target.classList.toggle('active');
+        }
+
+        window.onload = filterCards;
+    </script>
+</body>
+
+</html>
