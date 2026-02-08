@@ -548,20 +548,20 @@ const scenarios = [
     },
     {
         title: "Tomodachi (Friend)",
-        question: "Sono hito wa watashi no tomodachi desu ka?",
-        questionEN: "Is that person my friend?",
-        pos: "Hai, kono hito wa anata no tomodachi desu.",
-        posEN: "Yes, this person is your friend.",
-        neg: "Iie, kono hito wa anata no tomodachi de wa arimasen.",
-        negEN: "No, this person is not your friend."
+        question: "Kono hito wa watashi no tomodachi desu ka?",
+        questionEN: "Is this person my friend?",
+        pos: "Hai, sono hito wa anata no tomodachi desu.",
+        posEN: "Yes, that person is your friend.",
+        neg: "Iie, sono hito wa anata no tomodachi de wa arimasen.",
+        negEN: "No, that person is not your friend."
     },
     {
         title: "Senpai (Senior)",
-        question: "Ano hito wa watashi no senpai desu ka?",
-        questionEN: "Is that person my senior?",
-        pos: "Hai, ano hito wa anata no senpai desu.",
+        question: "Kono hito wa watashi no senpai desu ka?",
+        questionEN: "Is this person my senior?",
+        pos: "Hai, sono hito wa anata no senpai desu.",
         posEN: "Yes, that person is your senior.",
-        neg: "Iie, ano hito wa anata no senpai de wa arimasen.",
+        neg: "Iie, sono hito wa anata no senpai de wa arimasen.",
         negEN: "No, that person is not your senior."
     },
     {
