@@ -656,8 +656,22 @@ function toggleMode() {
 
 function setQuizMode(m) {
     quizMode = m;
-    document.getElementById('qModeJtoE').className = m === 'JtoE' ? 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 bg-white shadow-sm text-indigo-600 border border-indigo-200/50' : 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 text-slate-600 hover:text-slate-900';
-    document.getElementById('qModeEtoJ').className = m === 'EtoJ' ? 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 bg-white shadow-sm text-indigo-600 border border-indigo-200/50' : 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 text-slate-600 hover:text-slate-900';
+    const btnJ = document.getElementById('qModeJtoE');
+    const btnE = document.getElementById('qModeEtoJ');
+
+    // Reset styles
+    btnJ.style.color = '';
+    btnE.style.color = '';
+
+    if (m === 'JtoE') {
+        btnJ.className = 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 bg-indigo-600 text-white border border-indigo-600/50';
+        btnE.className = 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 opacity-60 hover:opacity-100';
+        btnE.style.color = 'var(--text-secondary)';
+    } else {
+        btnJ.className = 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 opacity-60 hover:opacity-100';
+        btnJ.style.color = 'var(--text-secondary)';
+        btnE.className = 'flex-1 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-200 bg-indigo-600 text-white border border-indigo-600/50';
+    }
 }
 
 function filterCards() {
